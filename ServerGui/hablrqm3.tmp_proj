@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1AD82972-FD44-4ED2-B909-A0738F6C03FE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerGui</RootNamespace>
+    <AssemblyName>ServerGui</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://qusma.com/QDMS/</InstallUrl>
+    <ProductName>QUSMA Data Management System</ProductName>
+    <PublisherName>QUSMA</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.9.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ServerGui.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>ECB0008DD36E6880FB0BC231B92120C237852522</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>QDMSServer_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>appbar.box.layered.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckBoxItem.cs" />
+    <Compile Include="CheckBoxTag.cs" />
+    <Compile Include="ColumnOptions.cs" />
+    <Compile Include="DataGridExtensions.cs" />
+    <Compile Include="DataStorageFactory.cs" />
+    <Compile Include="Interfaces\IJobViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ListBoxExt.cs" />
+    <Compile Include="UpdateHelper.cs" />
+    <Compile Include="UserControls\CustomDataGrid.cs" />
+    <Compile Include="UserControls\DataUpdateJobControl.xaml.cs">
+      <DependentUpon>DataUpdateJobControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DataUtils.cs" />
+    <Compile Include="Utils\DbBackup.cs" />
+    <Compile Include="Utils\DBUtils.cs" />
+    <Compile Include="Utils\QuartzUtils.cs" />
+    <Compile Include="Utils\Seed.cs" />
+    <Compile Include="Utils\SqlServerBackup.cs" />
+    <Compile Include="ValidationRules\TimeValidationRule.cs" />
+    <Compile Include="ValueConverters\DatasourceMultiValueConverter.cs" />
+    <Compile Include="ValueConverters\ExchangeMultiValueConverter.cs" />
+    <Compile Include="ValueConverters\InvertBooleanConverter.cs" />
+    <Compile Include="ValueConverters\IsNullConverter.cs" />
+    <Compile Include="ValueConverters\KVPToValueConverter.cs" />
+    <Compile Include="ValueConverters\StringFormatConverter.cs" />
+    <Compile Include="ValueConverters\StringToIntConverter.cs" />
+    <Compile Include="ValueConverters\StringToNullableConverter.cs" />
+    <Compile Include="ValueConverters\TimeSpanConverter.cs" />
+    <Compile Include="ValueConverters\TZToStringConverter.cs" />
+    <Compile Include="ViewModels\AddInstrumentIbViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DataImportViewModel.cs" />
+    <Compile Include="ViewModels\DataUpdateJobViewModel.cs" />
+    <Compile Include="ViewModels\DataEditViewModel.cs" />
+    <Compile Include="ViewModels\EditExchangesViewModel.cs" />
+    <Compile Include="ViewModels\EditRootSymbolViewModel.cs" />
+    <Compile Include="ViewModels\EditSessionViewModel.cs" />
+    <Compile Include="ViewModels\ExchangesViewModel.cs" />
+    <Compile Include="ViewModels\HistoricalRequestViewModel.cs" />
+    <Compile Include="ViewModels\JobViewModelBase.cs" />
+    <Compile Include="Utils\ParseHelper.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\RootSymbolViewModel.cs" />
+    <Compile Include="ViewModels\SchedulerViewModel.cs" />
+    <Compile Include="ViewModels\SessionTemplatesViewModel.cs" />
+    <Compile Include="ViewModels\TagsViewModel.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
+    <Compile Include="ViewModels\ValidatingViewModelBase.cs" />
+    <Compile Include="Windows\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddInstrumentInteractiveBrokersWindow.xaml.cs">
+      <DependentUpon>AddInstrumentInteractiveBrokersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChangelogWindow.xaml.cs">
+      <DependentUpon>ChangelogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\SessionTemplatesWindow.xaml.cs">
+      <DependentUpon>SessionTemplatesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\EditRootSymbolWindow.xaml.cs">
+      <DependentUpon>EditRootSymbolWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\RootSymbolsWindow.xaml.cs">
+      <DependentUpon>RootSymbolsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\HistoricalRequestWindow.xaml.cs">
+      <DependentUpon>HistoricalRequestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\DataEditWindow.xaml.cs">
+      <DependentUpon>DataEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\DataImportWindow.xaml.cs">
+      <DependentUpon>DataImportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DBConnectionWindow.xaml.cs">
+      <DependentUpon>DBConnectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\EditExchangeWindow.xaml.cs">
+      <DependentUpon>EditExchangeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\EditSessionTemplateWindow.xaml.cs">
+      <DependentUpon>EditSessionTemplateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\ExchangesWindow.xaml.cs">
+      <DependentUpon>ExchangesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\ScheduledJobsWindow.xaml.cs">
+      <DependentUpon>ScheduledJobsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MVVM\TagsWindow.xaml.cs">
+      <DependentUpon>TagsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValueConverters\LogEventInfoToStringConverter.cs" />
+    <Compile Include="ValueConverters\LogItemToColorConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MemoryTarget.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Resources\QuartzSqlServerDbInit.txt" />
+    <None Include="Resources\QuartzMySqlDbInit.txt" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="CHANGELOG" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="QDMSServer_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataRequestClient\DataRequestsClient.csproj">
+      <Project>{c8c75909-6503-481d-8985-45bb91a88487}</Project>
+      <Name>DataRequestsClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{aea3426e-81b7-4c7e-a1cc-29743229cdcc}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server.DataSources.InteractiveBrokers\DataSources.InteractiveBrokers.csproj">
+      <Project>{723afac2-099b-410f-9d32-fe34611239e3}</Project>
+      <Name>DataSources.InteractiveBrokers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server.DataStorage.SqlServer\DataStorage.SqlServer.csproj">
+      <Project>{17ade009-cab6-4389-93e1-afe1a2dbb18c}</Project>
+      <Name>DataStorage.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{7ea40d71-4d14-4b86-b07d-932959fa0d20}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{c5427849-6011-4198-bca4-d7cdcf971e7c}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Accessibility.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Libraries\OEC\API.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\AsyncIO.0.1.26.0\lib\net40\AsyncIO.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Libraries\BLPAPI\Bloomberglp.Blpapi.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Libraries\OEC\CommLib.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Common\bin\Release\Common.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Common.Logging.NLog20.3.3.1\lib\net40\Common.Logging.NLog20.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\DataAccess\bin\Release\DataAccess.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\DataGridFilter.1.0.3\lib\DataGridFilterLibrary.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\DataRequestClient\bin\Release\DataRequestClient.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Server.DataSources.InteractiveBrokers\bin\Release\DataSources.InteractiveBrokers.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Server.DataStorage.SqlServer\bin\Release\DataStorage.SqlServer.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\FluentValidation.6.4.1\lib\Net45\FluentValidation.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\QDMS-IBClient.1.0.0\lib\Krs.Ats.IBNet.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\LumenWorksCsvReader.3.9.1\lib\net20\LumenWorks.Framework.IO.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\lz4net.1.0.15.93\lib\net4-client\LZ4.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\MahApps.Metro.1.4.3\lib\net45\MahApps.Metro.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Microsoft.VisualBasic.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\mscorlib.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\NetMQ.4.0.0.1\lib\net40\NetMQ.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\NLog.4.4.5\lib\net45\NLog.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\NodaTime.2.0.0\lib\net45\NodaTime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\PresentationFramework.Aero.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\PresentationFramework.dll" />
+    <ReferencePath Include="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\PresentationUI\v4.0_4.0.0.0__31bf3856ad364e35\PresentationUI.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\protobuf-net.2.1.0\lib\net451\protobuf-net.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Libraries\OEC\ProtoSharp.Core.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\QLNet.1.9.1\lib\net45\QLNet.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Quartz.2.5.0\lib\net40\Quartz.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\ReachFramework.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\reactiveui-core.7.2.0\lib\Net45\ReactiveUI.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\reactiveui-events.7.2.0\lib\Net45\ReactiveUI.Events.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\Server\bin\Release\Server.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Splat.1.6.2\lib\Net45\Splat.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Activities.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Deployment.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\MahApps.Metro.1.4.3\lib\net45\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\WindowsBase.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.DataGrid.dll" />
+    <ReferencePath Include="C:\VSProjects\qdms\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Collections.Concurrent.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Collections.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ComponentModel.Annotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ComponentModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ComponentModel.EventBasedAsync.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Diagnostics.Contracts.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Diagnostics.Debug.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Diagnostics.Tools.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Diagnostics.Tracing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Dynamic.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Globalization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.IO.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Linq.Expressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Linq.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Linq.Queryable.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Net.NetworkInformation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Net.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Net.Requests.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Net.WebHeaderCollection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ObjectModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.Emit.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.Emit.ILGeneration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.Emit.Lightweight.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Reflection.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Resources.ResourceManager.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Handles.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.InteropServices.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.InteropServices.WindowsRuntime.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Numerics.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Serialization.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Serialization.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Runtime.Serialization.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Security.Principal.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ServiceModel.Duplex.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ServiceModel.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ServiceModel.NetTcp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ServiceModel.Primitives.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.ServiceModel.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Text.Encoding.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Text.Encoding.Extensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Text.RegularExpressions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Threading.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Threading.Tasks.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Threading.Tasks.Parallel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Threading.Timer.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Xml.ReaderWriter.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Xml.XDocument.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\Facades\System.Xml.XmlSerializer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\MainWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\UserControls\DataUpdateJobControl.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\AboutWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\AddInstrumentInteractiveBrokersWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\ChangelogWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\SessionTemplatesWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\EditRootSymbolWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\RootSymbolsWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\HistoricalRequestWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\DataEditWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\DataImportWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\DBConnectionWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\EditExchangeWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\EditSessionTemplateWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\ExchangesWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\ScheduledJobsWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\SettingsWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\Windows\MVVM\TagsWindow.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\App.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\ServerGui_Content.g.cs" />
+    <Compile Include="C:\VSProjects\qdms\ServerGui\obj\Release\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

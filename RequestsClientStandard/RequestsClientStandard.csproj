@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<Title>AzureBillingApi</Title>
+        <Version>1.1.0.3</Version>
+        <Copyright>Copyright 2017 codehollow.com</Copyright>
+        <Description>.net library that reads data from the azure rest billing (ratecard and usage) apis and calculates the costs.</Description>
+        <Authors>Armin Reiter</Authors>
+        <Company>Armin Reiter</Company>
+        <PackageLicenseUrl>https://github.com/codehollow/AzureBillingApi/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/codehollow/AzureBillingApi/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/codehollow/AzureBillingApi/</RepositoryUrl>
+        <PackageTags>azure billing billingapi windowsazure microsoftazure managementapi azuremanagementapi</PackageTags>
+        <PackageReleaseNotes>migrated azurebillingapi to .netstandard 1.4</PackageReleaseNotes>
+        <AssemblyVersion>1.1.0.3</AssemblyVersion>
+        <FileVersion>1.1.0.3</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+     <PackageReference Include="NetMQ" Version="4.0.0.1" />
+     <PackageReference Include="NLog" Version="5.0.0-beta11" />
+     <PackageReference Include="protobuf-net" Version="2.3.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonStandard\CommonStandard.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="NetMQ">
+      <HintPath>..\packages\NetMQ.4.0.0.1\lib\net40\NetMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

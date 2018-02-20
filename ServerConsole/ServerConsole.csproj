@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonStandard\CommonStandard.csproj" />
+    <ProjectReference Include="..\DataAccessStandard\DataAccessStandard.csproj" />
+    <ProjectReference Include="..\DataRequestsClientStandard\DataRequestsClientStandard.csproj" />
+    <ProjectReference Include="..\DataStorage.SqlServerStandard\DataStorage.SqlServerStandard.csproj" />
+    <ProjectReference Include="..\RequestsClientStandard\RequestsClientStandard.csproj" />
+    <ProjectReference Include="..\ServerStandard\ServerStandard.csproj" />
+  </ItemGroup>
+
+</Project>

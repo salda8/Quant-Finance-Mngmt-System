@@ -1,0 +1,69 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ServerGui.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ibClientHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="ibClientPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4001</Value>
+    </Setting>
+    <Setting Name="instrumentsGridLayout" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RealTimeDataServerPublishPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5557</Value>
+    </Setting>
+    <Setting Name="RealTimeDataServerRequestPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5556</Value>
+    </Setting>
+    <Setting Name="instrumentServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5558</Value>
+    </Setting>
+    <Setting Name="HistoricalServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5555</Value>
+    </Setting>
+    <Setting Name="logDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Logs\</Value>
+    </Setting>
+    <Setting Name="sqlServerHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="sqlServerUseWindowsAuthentication" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="sqlServerUsername" GenerateDefaultValueInCode="false" Type="System.String" Scope="User">
+      <Value Profile="(Default)">username</Value>
+    </Setting>
+    <Setting Name="sqlServerPassword" GenerateDefaultValueInCode="false" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="histClientIBID" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="rtdClientIBID" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="MessagesServerPullPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5554</Value>
+    </Setting>
+    <Setting Name="MessagesServerPushPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5553</Value>
+    </Setting>
+    <Setting Name="EquityUpdateServerRouterPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5552</Value>
+    </Setting>
+    <Setting Name="databaseType" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="dataDatabaseName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">data</Value>
+    </Setting>
+    <Setting Name="allPurposeDatabaseName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">server</Value>
+    </Setting>
+    <Setting Name="InstrumetnUpdateRequestSocketPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5558</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

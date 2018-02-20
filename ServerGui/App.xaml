@@ -1,0 +1,43 @@
+<Application x:Class="ServerGui.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/Resources/Icons.xaml">
+          <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:ServerGui.ViewModel" />
+        </ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
+      <Style BasedOn="{StaticResource MetroDataGrid}" TargetType="DataGrid">
+        <Setter Property="AlternatingRowBackground" Value="WhiteSmoke" />
+        <Setter Property="BorderBrush" Value="#B9B9B9" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#B9B9B9" />
+        <Setter Property="VerticalGridLinesBrush" Value="#B9B9B9" />
+        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontSize" Value="11" />
+      </Style>
+      <Style x:Key="DataGridRowStyle" BasedOn="{StaticResource MetroDataGridRow}" TargetType="DataGridRow">
+        <Setter Property="MinHeight" Value="20" />
+      </Style>
+      <Style BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="DataGridColumnHeader">
+        <Setter Property="ContentTemplate" Value="{x:Null}" />
+        <Setter Property="Padding" Value="5,4,4,5" />
+      </Style>
+      <Style x:Key="DataGridCheckBoxStyle" BasedOn="{StaticResource MetroCheckBox}" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8,0,3,0" />
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

@@ -1,0 +1,229 @@
+﻿<controls:MetroWindow
+    x:Class="ServerGui.Windows.HistoricalRequestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:Common;assembly=Common"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:enums="clr-namespace:Common.Enums;assembly=Common"
+    xmlns:serverGui="clr-namespace:ServerGui"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:valueConverters="clr-namespace:ServerGui.ValueConverters"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:enums1="clr-namespace:Common.Enums;assembly=CommonStandard"
+    Title="{Binding Title}"
+    Width="1200"
+    Height="432"
+    BorderBrush="Black"
+    BorderThickness="1">
+    <controls:MetroWindow.Resources>
+        <ObjectDataProvider
+            x:Key="BarSizes"
+            MethodName="GetValues"
+            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enums1:BarSize" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="DataLocations"
+            MethodName="GetValues"
+            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enums1:DataLocation" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </controls:MetroWindow.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="297*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Label
+            Margin="10,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Resolution: " />
+        <ComboBox
+            x:Name="ResolutionComboBox"
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="150"
+            Margin="78,3,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding Source={StaticResource BarSizes}}"
+            SelectedIndex="11"
+            SelectedItem="{Binding SelectedBarsize}" />
+
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Start: " />
+        <DatePicker
+            Name="StartDateEdit"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="150"
+            Margin="56,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SelectedDate="{Binding StartDate}" />
+
+
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="300,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="End: " />
+        <DatePicker
+            Name="EndDateEdit"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="150"
+            Margin="350,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SelectedDate="{Binding EndDate}" />
+
+
+        <Button
+            x:Name="LoadDataBtn"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="75"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding RequestDataCommand}"
+            Content="Request Data"
+            FontSize="9"
+            ToolTip="{Binding RequestDataTooltip}"
+            ToolTipService.ShowOnDisabled="True" />
+        <DataGrid
+            x:Name="DataGrid"
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding Data}"
+            RowStyle="{DynamicResource DataGridRowStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=DateTimeClose, StringFormat={}{0:yyyy-MM-dd}}" Header="Date" />
+                <DataGridTextColumn Binding="{Binding Path=DateTimeClose, StringFormat={}{0:HH:mm:ss.fff}}" Header="Time" />
+                <DataGridTextColumn
+                    x:Name="OpenCol"
+                    Width="65"
+                    Binding="{Binding Path=Open}"
+                    Header="Open" />
+                <DataGridTextColumn
+                    x:Name="HighCol"
+                    Width="65"
+                    Binding="{Binding Path=High}"
+                    Header="High" />
+                <DataGridTextColumn
+                    x:Name="LowCol"
+                    Width="65"
+                    Binding="{Binding Path=Low}"
+                    Header="Low" />
+                <DataGridTextColumn
+                    x:Name="CloseCol"
+                    Width="65"
+                    Binding="{Binding Path=Close}"
+                    Header="Close" />
+                <DataGridTextColumn
+                    Width="75"
+                    Binding="{Binding Path=Volume, StringFormat={}{0:n0}}"
+                    Header="Volume" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            x:Name="ExportBtn"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="75"
+            Margin="10,26,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding ExportCommand}"
+            Content="Export..." />
+        <Button
+            x:Name="CloseBtn"
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="75"
+            Margin="10,0,0,10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Command="{Binding CloseCommand}"
+            Content="Close" />
+        <Label
+            Name="StatusLabel"
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="10,12,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Ready" />
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="250,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Data Location: " />
+        <ComboBox
+            Name="DataLocationComboBox"
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="335,3,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding Source={StaticResource DataLocations}}"
+            SelectedIndex="0"
+            SelectedItem="{Binding SelectedDataLocation}"
+            ToolTip="Get data from the external source only, local database only, or both." />
+
+        <CheckBox
+            x:Name="SaveToLocalStorageCheckBox"
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="561,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Save to Local Storage"
+            IsChecked="{Binding IsSaveToLocalStorage}"
+            ToolTip="Save downloaded data to local storage." />
+        <CheckBox
+            x:Name="RTHOnlyCheckBox"
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="739,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Regular Trading Hours Only"
+            IsChecked="{Binding IsRthOnly}"
+            ToolTip="Get data only during regular trading hours." />
+
+    </Grid>
+</controls:MetroWindow>
