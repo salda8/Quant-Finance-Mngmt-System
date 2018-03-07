@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
@@ -13,7 +14,7 @@ namespace WebApi.Controllers
     public class InstrumentsController : Controller
     {
         // GET: api/Instruments
-        [HttpGet, Produces(typeof(IEnumerable<Instrument>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<Instrument>))]
         
         public async Task<IActionResult> Get()
         {
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Instruments/5
-        [HttpGet("{id}"), Produces(typeof(Instrument))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(Instrument))]
         
         public async Task<IActionResult> Get(int id)
         {

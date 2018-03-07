@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
@@ -13,7 +14,7 @@ namespace WebApi.Controllers
     public class AccountSummaryController : Controller
     {
         // GET: api/AccountSummary
-        [HttpGet("get"), Produces(typeof(IEnumerable<AccountSummary>))]
+        [HttpGet("get"), MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<AccountSummary>))]
         public async Task<IActionResult> GetAll()
         {
             throw new NotImplementedException();
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         
         
         // GET: api/AccountSummary/5
-        [HttpGet("{id}"), Produces(typeof(AccountSummary))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(AccountSummary))]
         public async Task<IActionResult> Get(int id)
         {
             throw new NotImplementedException();

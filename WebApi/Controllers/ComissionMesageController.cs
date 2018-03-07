@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
@@ -13,14 +14,14 @@ namespace WebApi.Controllers
     public class CommissionMessageController : Controller
     {
         // GET: api/CommissionMessage
-        [HttpGet, Produces(typeof(IEnumerable<CommissionMessage>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<CommissionMessage>))]
         public async Task<IActionResult> Get()
         {
            throw new NotImplementedException();
         }
 
         // GET: api/CommissionMessage/5
-        [HttpGet("{id}"), Produces(typeof(CommissionMessage))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(CommissionMessage))]
         public async Task<IActionResult> Get(int id)
         {
             throw new NotImplementedException();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
@@ -13,14 +14,14 @@ namespace WebApi.Controllers
     public class SessionTemplateController : Controller
     {
         // GET: api/SessionTemplate
-        [HttpGet, Produces(typeof(IEnumerable<SessionTemplate>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<SessionTemplate>))]
         public async Task<IActionResult> Get()
         {
            throw new NotImplementedException();
         }
 
         // GET: api/SessionTemplate/5
-        [HttpGet("{id}"), Produces(typeof(SessionTemplate))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(SessionTemplate))]
         public async Task<IActionResult> Get(int id)
         {
             throw new NotImplementedException();

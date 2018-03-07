@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +14,14 @@ namespace WebApi.Controllers
     public class ExecutionMessageController : Controller
     {
         // GET: api/ExecutionMessage
-        [HttpGet, Produces(typeof(IEnumerable<ExecutionMessage>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<ExecutionMessage>))]
         public async Task<IActionResult> Get()
         {
            throw new NotImplementedException();
         }
 
         // GET: api/ExecutionMessage/5
-        [HttpGet("{id}"), Produces(typeof(ExecutionMessage))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(ExecutionMessage))]
         
         public async Task<IActionResult> Get(int id)
         {

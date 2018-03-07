@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace WebApi.Controllers
 {
+   
     [Produces("application/json"), Route(ApiRoutes.LiveTrades)]
     public class LiveTradesController : Controller
     {
         // GET: api/LiveTrades
-        [HttpGet, Produces(typeof(IEnumerable<LiveTrade>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<LiveTrade>), "Suucess get result." )]
         
         public async Task<IActionResult> Get()
         {
@@ -21,7 +24,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/LiveTrades/5
-        [HttpGet("{id}"), Produces(typeof(LiveTrade))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(LiveTrade))]
         
         public async Task<IActionResult> Get(int id)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using Common.Interfaces;
@@ -14,7 +15,7 @@ namespace WebApi.Controllers
     public class DataController<T> : Controller where T : OHLCBar
     {
         // GET: api/Data
-        [HttpGet, Produces(typeof(IEnumerable<OHLCBar>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<OHLCBar>))]
         
         public async Task<IActionResult> Get()
         {
@@ -22,7 +23,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Data/5
-        [HttpGet("{id}"), Produces(typeof(OHLCBar))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(OHLCBar))]
         
         public async Task<IActionResult> Get(int id)
         {

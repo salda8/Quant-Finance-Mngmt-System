@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
@@ -10,17 +11,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers
 {
     [Produces("application/json"), Route(ApiRoutes.Account)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(200)]
+
     public class AccountController : Controller
     {
         // GET: api/Account
-        [HttpGet, Produces(typeof(IEnumerable<Account>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<Account>))]
         public async Task<IActionResult> Get()
         {
             throw new NotImplementedException();
         }
 
         // GET: api/Account/5
-        [HttpGet("{id}"), Produces(typeof(Account))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(Account))]
         public async Task<IActionResult> Get(int id)
         {
             throw new NotImplementedException();

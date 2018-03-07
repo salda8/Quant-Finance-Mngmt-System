@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace WebApi.Controllers
     public class TestController : Controller
     {
         // GET: api/Test
-        [HttpGet, Produces(typeof(IEnumerable<object>))]
+        [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<object>))]
         
         public async Task<IActionResult> Get()
         {
@@ -19,7 +20,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Test/5
-        [HttpGet("{id}"), Produces(typeof(object))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(object))]
         
         public async Task<IActionResult> Get(int id)
         {
