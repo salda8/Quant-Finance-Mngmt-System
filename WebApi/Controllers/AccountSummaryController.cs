@@ -1,47 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Common.EntityModels;
 using CommonStandard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Produces("application/json")]
-    [Route(ApiRoutes.AccountSummary)]
+    [Produces("application/json"), Route(ApiRoutes.AccountSummary)]
     public class AccountSummaryController : Controller
     {
         // GET: api/AccountSummary
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("get"), MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<AccountSummary>))]
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            throw new NotImplementedException();
+        }
+        
+        
+        // GET: api/AccountSummary/5
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(AccountSummary))]
+        public async Task<IActionResult> Get(int id)
+        {
+            throw new NotImplementedException();
         }
 
-        // GET: api/AccountSummary/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
         // POST: api/AccountSummary
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]AccountSummary value)
         {
+            throw new NotImplementedException();
         }
-        
+
         // PUT: api/AccountSummary/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(int id, [FromBody]AccountSummary value)
         {
+            throw new NotImplementedException();
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }
