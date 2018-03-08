@@ -23,9 +23,12 @@ namespace Server.Repositories
         public readonly IMyDbContext Context;
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        private DbSet<Instrument> dbSet;
+
         public InstrumentRepository(IMyDbContext context)
         {
             Context = context;
+            dbSet = context.DbContext.Set<Instrument>();
         }
 
         #region IInstrumentSource Members
@@ -40,7 +43,7 @@ namespace Server.Repositories
         public async Task<Instrument> AddInstrument(Instrument instrument, bool saveChanges = true)
         {
             //Check if an instrument with these unique constraints already exists
-            var existingInstrument = Context.Instruments.SingleOrDefault(x =>
+            var existingInstrument = dbSet.SingleOrDefault(x =>
                 x.ID == instrument.ID ||
                 x.Symbol == instrument.Symbol &&
                 x.DatasourceID == instrument.DatasourceID &&
@@ -63,7 +66,7 @@ namespace Server.Repositories
 
             AddSessionToInstrument(instrument);
 
-            Context.Instruments.Add(instrument);
+            dbSet.Add(instrument);
             if (saveChanges)
             {
                 await Context.DbContext.SaveChangesAsync().ConfigureAwait(false);
@@ -78,17 +81,17 @@ namespace Server.Repositories
         {
             if (instrument.SessionsSource == SessionsSource.Template)
             {
-                SessionTemplate template = Context.SessionTemplates.Include(x => x.Sessions)
-                    .FirstOrDefault(x => x.ID == instrument.SessionTemplateID);
+                var template =dbSet.Include(x => x.Sessions)
+                    .Where(x => x.ID == instrument.SessionTemplateID).FirstOrDefault().Sessions;
 
-                if (template?.Sessions != null)
+                if (template != null)
                 {
                     //todo
-                    //instrument.InstrumentInstrumentSessions.Sessions = new List<InstrumentSession>();
-                    //foreach (TemplateSession s in template.Sessions)
-                    //{
-                    //    instrument.Sessions.Add(s.ToInstrumentSession());
-                    //}
+                    instrument.Sessions = new List<InstrumentSession>();
+                    foreach (var s in template)
+                    {
+                       instrument.Sessions.Add(s.ToInstrumentSession());
+                    }
                 }
             }
         }
@@ -110,7 +113,7 @@ namespace Server.Repositories
             if (newValues.SessionsSource == SessionsSource.Custom)
             {
                 //todo
-                //attachedInstrument.InstrumentInstrumentSessions.UpdateCollectionAndElements(newValues.Sessions, Context);
+                attachedInstrument.Sessions.UpdateCollectionAndElements(newValues.Sessions, Context);
             }
 
             await Context.DbContext.SaveChangesAsync().ConfigureAwait(false);
@@ -164,8 +167,8 @@ namespace Server.Repositories
         /// </summary>
         public async Task RemoveInstrument(Instrument instrument, IDataStorage localStorage)
         {
-            Context.Instruments.Attach(instrument);
-            Context.Instruments.Remove(instrument);
+            dbSet.Attach(instrument);
+            dbSet.Remove(instrument);
             await Context.DbContext.SaveChangesAsync().ConfigureAwait(false);
 
             localStorage.Connect();
@@ -182,17 +185,17 @@ namespace Server.Repositories
         private void ValidateInstrument(Instrument instrument)
         {
             //make sure data source is set and exists
-            if (instrument.Datasource == null || Context.Datasources.Find(instrument.DatasourceID) == null)
+            if (instrument.Datasource == null || dbSet.Find(instrument.DatasourceID) == null)
                 throw new ArgumentException("Invalid datasource.");
 
             //make sure exchange exists, if it is set
-            if (instrument.Exchange != null && Context.Exchanges.Find(instrument.ExchangeID) == null)
+            if (instrument.Exchange != null && dbSet.Find(instrument.ExchangeID) == null)
                 throw new ArgumentException("Exchange does not exist.");
         }
 
         private IQueryable<Instrument> GetIQueryable()
         {
-            return Context.Instruments
+            return dbSet
                 .Include(x => x.Tags)
                 .Include(x => x.Exchange)
                 .Include(x => x.ExpirationRule)
