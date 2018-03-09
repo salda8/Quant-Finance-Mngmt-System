@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Common;
 using Common.Interfaces;
 using CommonStandard.Interfaces;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using NLog;
 
 namespace Server.Repositories
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         internal IMyDbContext context;
         private DbContext myDbContext;
@@ -25,48 +27,43 @@ namespace Server.Repositories
             this.dbSet = myDbContext.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public virtual Task<List<TEntity>> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<TEntity> query = dbSet.AsNoTracking();
 
             if (filter != null)
             {
                 query = query.Where(filter);
             }
 
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
+            query = includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                                     .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
-            }
+            return orderBy != null ? orderBy(query).ToListAsync() : query.ToListAsync();
         }
 
-        public virtual TEntity GetByID(object id)
+        public virtual Task<TEntity> GetByID(object id)
         {
-            return dbSet.Find(id);
+            return dbSet.FindAsync(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual Task<TEntity> Insert(TEntity entity)
         {
-            dbSet.Add(entity);
+            var add = dbSet.Add(entity);
+            context.DbContext.SaveChanges();
+            
+            return Task.Run(()=>entity);
+
         }
 
         public virtual void Delete(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);
+            context.DbContext.SaveChanges();
         }
 
         public virtual void Delete(TEntity entityToDelete)
@@ -76,12 +73,15 @@ namespace Server.Repositories
                 dbSet.Attach(entityToDelete);
             }
             dbSet.Remove(entityToDelete);
+            context.DbContext.SaveChanges();
         }
 
-        public virtual void Update(TEntity entityToUpdate)
+        public virtual Task<TEntity> Update(TEntity entityToUpdate)
         {
             dbSet.Attach(entityToUpdate);
             myDbContext.Entry(entityToUpdate).State = EntityState.Modified;
+            context.DbContext.SaveChanges();
+            return Task.Run(() => entityToUpdate);
         }
     }
 }

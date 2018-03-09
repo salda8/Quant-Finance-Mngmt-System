@@ -1,9 +1,12 @@
-﻿using DataAccess;
+﻿using CommonStandard.Interfaces;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Server.Repositories;
+using ServerStandard.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApi
@@ -45,6 +48,9 @@ namespace WebApi
         {
             //services.AddDbContext<DataDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DataDb"]));
             services.AddDbContext<MyDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MyDb"]));
+
+            services.AddScoped<IMyDbContext, MyDBContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc();
             services.AddSwaggerGen(c =>

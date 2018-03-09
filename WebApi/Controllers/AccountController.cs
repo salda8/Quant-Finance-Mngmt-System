@@ -2,54 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using Common.EntityModels;
+using Common.Interfaces;
 using CommonStandard;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.Repositories;
+using ServerStandard.Repositories;
 
 namespace WebApi.Controllers
 {
     [Produces("application/json"), Route(ApiRoutes.Account)]
-    [ProducesResponseType(404)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(200)]
-
     public class AccountController : Controller
     {
+        private const string PostActionName = "PostAccount";
+
         // GET: api/Account
         [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<Account>))]
         public async Task<IActionResult> Get()
         {
-            throw new NotImplementedException();
+           return Ok(await repository.Get());
+
         }
 
-        // GET: api/Account/5
+    // GET: api/Account/5
         [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(Account))]
         public async Task<IActionResult> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+    {
+        return Ok(await repository.GetByID(id));
+    }
         
         // POST: api/Account
-        [HttpPost]
+        [HttpPost(Name= PostActionName), MySwaggerResponse(HttpStatusCode.Created, typeof(Account))]
         public async Task<IActionResult> Post([FromBody]Account value)
         {
-            throw new NotImplementedException();
+            return Created(PostActionName, await repository.Insert(value));
         }
         
         // PUT: api/Account/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(Account))]
         public async Task<IActionResult> Put(int id, [FromBody]Account value)
         {
-            throw new NotImplementedException();
+          return  Ok(await repository.Update(value));
         }
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), MySwaggerResponse(HttpStatusCode.Accepted)]
         public async Task<IActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            repository.Delete(id);
+            return Accepted();
         }
+
+
+        public AccountController(IGenericRepository<Account> repository)
+        {
+            this.repository = repository;
+        }
+
+        private readonly IGenericRepository<Account> repository;
     }
-}
+    }
+
