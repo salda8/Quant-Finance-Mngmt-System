@@ -7,17 +7,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CommonStandard;
 using Common.EntityModels;
+using Server.Repositories;
 
 namespace WebApi.Controllers
 {
     [Produces("application/json"), Route(ApiRoutes.ExecutionMessage)]
     public class ExecutionMessageController : Controller
     {
+        private IGenericRepository<ExecutionMessage> repository;private const string PostActionName="PostExecutionMessage";
+
         // GET: api/ExecutionMessage
         [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<ExecutionMessage>))]
         public async Task<IActionResult> Get()
         {
-           throw new NotImplementedException();
+            return Ok(await repository.Get());
         }
 
         // GET: api/ExecutionMessage/5
@@ -25,28 +28,33 @@ namespace WebApi.Controllers
         
         public async Task<IActionResult> Get(int id)
         {
-            throw new NotImplementedException();
+            return Ok(await repository.GetByID(id));
         }
         
         // POST: api/ExecutionMessage
-        [HttpPost]
+         [HttpPost(Name = PostActionName), MySwaggerResponse(HttpStatusCode.Created, typeof(ExecutionMessage))]
         public async Task<IActionResult> Post([FromBody]ExecutionMessage value)
         {
-             throw new NotImplementedException();
+            return Created(PostActionName, await repository.Insert(value));
         }
         
         // PUT: api/ExecutionMessage/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(Account))]
         public async Task<IActionResult> Put(int id, [FromBody]ExecutionMessage value)
         {
              throw new NotImplementedException();
         }
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+         [HttpDelete("{id}"), MySwaggerResponse(HttpStatusCode.Accepted)]
         public async Task<IActionResult> Delete(int id)
         {
              throw new NotImplementedException();
+        }
+
+        public ExecutionMessageController(IGenericRepository<ExecutionMessage> repository)
+        {
+            this.repository = repository;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace WebApi.Controllers
     {
         private const string PostActionName = "PostAccount";
 
+
         // GET: api/Account
         [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<Account>))]
         public async Task<IActionResult> Get()
