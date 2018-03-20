@@ -11,6 +11,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using NLog;
+using Remotion.Linq.Clauses;
 
 namespace Server.Repositories
 {
@@ -43,6 +44,26 @@ namespace Server.Repositories
                                      .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return orderBy != null ? orderBy(query).ToListAsync() : query.ToListAsync();
+        }
+
+        public virtual Task<List<TEntity>> Get(
+
+            string filter="",
+            Dictionary<string, OrderingDirection> orderBy = null,
+            string includeProperties = "")
+        {
+            IQueryable<TEntity> query = dbSet.AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                //todo filter clausees, getting tablenames
+                query = query.FromSql($"SELECT * FROM {query.ElementType}{filter}");
+            }
+
+            query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                     .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+
+            return orderBy != null ? query.FromSql($"ORDER BY {orderBy.Keys.First()} {orderBy.Values.First().ToString()}").ToListAsync() : query.ToListAsync();
         }
 
         public virtual Task<TEntity> GetByID(object id)

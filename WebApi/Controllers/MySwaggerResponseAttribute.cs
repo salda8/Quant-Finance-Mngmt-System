@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace WebApi.Controllers

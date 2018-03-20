@@ -14,7 +14,7 @@ namespace WebApi.Controllers
     [Produces("application/json"), Route(ApiRoutes.OpenOrders)]
     public class OpenOrderController : Controller
     {
-        private IGenericRepository<OpenOrder> repository;private const string PostActionName="PostAccountSummary";
+        private IGenericRepository<OpenOrder> repository;private const string PostActionName="PostOpenOrder";
 
         // GET: api/OpenOrder
         [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<OpenOrder>))]

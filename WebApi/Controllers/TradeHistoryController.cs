@@ -14,7 +14,7 @@ namespace WebApi.Controllers
     [Produces("application/json"), Route(ApiRoutes.TradeHistory)]
     public class TradeHistoryController : Controller
     {
-        private IGenericRepository<TradeHistory> repository;private const string PostActionName="PostTradeHistor";
+        private IGenericRepository<TradeHistory> repository;private const string PostActionName="PostTradeHistory";
 
         // GET: api/TradeHistory
         [HttpGet, MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<TradeHistory>))]

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 using Common.EntityModels;
 using CommonStandard;
+using CommonStandard.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Repositories;
@@ -15,21 +17,51 @@ namespace WebApi.Controllers
     public class AccountSummaryController : Controller
     {
         private readonly IGenericRepository<AccountSummary> repository;
+        private readonly ETagCache cache;
         private const string PostActionName= "PostAccountSummary";
+        private const string CacheKey = "accountSummary";   
 
         // GET: api/AccountSummary
         [HttpGet("get"), MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<AccountSummary>))]
+        [ResponseCache(Duration = 1800)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await repository.Get());
         }
-        
-        
+
+        // GET: api/AccountSummary
+        [HttpGet("get/filtered"), MySwaggerResponse(HttpStatusCode.OK, typeof(IEnumerable<AccountSummary>))]
+        public async Task<IActionResult> GetAllFiltered(Expression<Func<AccountSummary, bool>> filter = null,
+           Dictionary<string,OrderingOrder> orderBy = null,
+            string includeProperties = "")
+        {
+            return Ok(await repository.Get());
+        }
+
+
         // GET: api/AccountSummary/5
-        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(AccountSummary))]
+        [HttpGet("{id}"), MySwaggerResponse(HttpStatusCode.OK, typeof(AccountSummary)), MySwaggerResponse(HttpStatusCode.NotModified, null, "Return a 304 if the ETag of the current record matches the ETag in the 'If - None - Match' HTTP header")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await repository.GetByID(id));
+          
+            var objectToReturn = cache.GetCachedObject<AccountSummary>($"{CacheKey}-{id}");
+            if (objectToReturn == null)
+            {
+                objectToReturn = await repository.GetByID(id);
+                if (objectToReturn==null)
+                {
+                    return NotFound();
+                }
+            }
+
+            bool isModified = cache.SetCachedObject($"{CacheKey}-{id}", objectToReturn);
+
+            if (isModified)
+            {
+                return Ok(objectToReturn);
+            }
+
+            return StatusCode((int)HttpStatusCode.NotModified);
         }
 
         // POST: api/AccountSummary
@@ -53,9 +85,10 @@ namespace WebApi.Controllers
             throw new NotImplementedException();
         }
 
-        public AccountSummaryController(IGenericRepository<AccountSummary> repository)
+        public AccountSummaryController(IGenericRepository<AccountSummary> repository, ETagCache cache)
         {
             this.repository = repository;
+            this.cache = cache;
         }
     }
 }

@@ -35,6 +35,7 @@ namespace WebApi.Controllers
         
         // POST: api/Servers
          //[HttpPost(Name = PostActionName), MySwaggerResponse(HttpStatusCode.Created, typeof(Server))]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody]object value)
         {
             //return Created(PostActionName, await repository.Insert(value));
