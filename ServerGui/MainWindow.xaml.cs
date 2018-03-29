@@ -131,7 +131,8 @@ namespace ServerGui
                         Tag = t.ID,
                         IsCheckable = true,
                         Style = (Style)Resources["TagCheckStyle"],
-                        Command = ViewModel.SetTagCommand
+                        Command = ViewModel.SetTagCommand,
+                        
                     };
 
                     button.CommandParameter = button;

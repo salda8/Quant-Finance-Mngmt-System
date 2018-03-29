@@ -8,75 +8,20 @@ namespace ServerStandard.Repositories
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-  
-        private readonly IMyDbContext context;
-        private readonly DbContext dbContext;
-        private GenericRepository<Account> accountRepository;
-
-        private GenericRepository<AccountSummary> accountSummaryRepository;
-
-        private GenericRepository<CommissionMessage> commissionMessageRepository;
-
+        private readonly IMyDbContext dbContext;
         private bool disposed;
 
-        private GenericRepository<Equity> equityRepository;
-
-        private GenericRepository<Exchange> exchangeRepository;
-
-        private GenericRepository<ExecutionMessage> executionMessageRepository;
-
-        private InstrumentRepository instrumentRepository;
-
-        private GenericRepository<OHLCBar> ohlcBarRepository;
-
-        private GenericRepository<OpenOrder> openOrderRepository;
-
-        private GenericRepository<OrderStatusMessage> orderStatusMessageRepository;
-
-        private GenericRepository<SessionTemplate> sessionTemplateRepository;
-
-        private GenericRepository<Strategy> strategyRepository;
-
-        private GenericRepository<TradeHistory> tradeHistoryRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public UnitOfWork(IMyDbContext context)
+        public UnitOfWork(IMyDbContext dbcontext)
         {
-            this.context = context;
-            dbContext = context.DbContext;
+            this.dbContext = dbcontext;
         }
 
-        public GenericRepository<AccountSummary> AccountSummaryRepository => accountSummaryRepository ?? (accountSummaryRepository= new GenericRepository<AccountSummary>(context));
-
-        public GenericRepository<CommissionMessage> CommissionMessageRepository => commissionMessageRepository ?? (commissionMessageRepository=new GenericRepository<CommissionMessage>(context));
-
-        public GenericRepository<Account> AccountRepository => accountRepository ?? (accountRepository= new GenericRepository<Account>(context));
-
-        public GenericRepository<Equity> EquityRepository => equityRepository ?? (equityRepository=new GenericRepository<Equity>(context));
-
-        public GenericRepository<Exchange> ExchangeRepository => exchangeRepository ?? (exchangeRepository=new GenericRepository<Exchange>(context));
-
-        public GenericRepository<ExecutionMessage> ExecutionMessageRepository => executionMessageRepository ?? (executionMessageRepository= new GenericRepository<ExecutionMessage>(context));
-
-        public InstrumentRepository InstrumentRepository => instrumentRepository ?? (instrumentRepository=new InstrumentRepository(context));
-
-        public GenericRepository<OHLCBar> OhlcBarRepository => ohlcBarRepository ?? (ohlcBarRepository=new GenericRepository<OHLCBar>(context));
-
-        public GenericRepository<OpenOrder> OpenOrderRepository => openOrderRepository ?? (openOrderRepository=new GenericRepository<OpenOrder>(context));
-
-        public GenericRepository<OrderStatusMessage> OrderStatusMessageRepository => orderStatusMessageRepository ?? (orderStatusMessageRepository=new GenericRepository<OrderStatusMessage>(context));
-
-        // private GenericRepository<Server> serverRepository; public GenericRepository<Server>
-        // ServerRepository { get { return this.serverRepository ?? new
-        // GenericRepository<Server>(context); } }
-        public GenericRepository<SessionTemplate> SessionTemplateRepository => sessionTemplateRepository ?? (sessionTemplateRepository=new GenericRepository<SessionTemplate>(context));
-
-        public GenericRepository<Strategy> StrategyRepository => strategyRepository ?? (strategyRepository=new GenericRepository<Strategy>(context));
-
-        public GenericRepository<TradeHistory> TradeHistoryRepository => tradeHistoryRepository ?? (tradeHistoryRepository=new GenericRepository<TradeHistory>(context));
+        
 
         public void Dispose()
         {
@@ -84,9 +29,11 @@ namespace ServerStandard.Repositories
             GC.SuppressFinalize(this);
         }
 
+        
+
         public void Save()
         {
-            dbContext.SaveChanges();
+            dbContext.DbContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -95,7 +42,7 @@ namespace ServerStandard.Repositories
             {
                 if (disposing)
                 {
-                    dbContext.Dispose();
+                    dbContext.DbContext.Dispose();
                 }
             }
             disposed = true;

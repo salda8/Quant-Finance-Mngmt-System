@@ -9,23 +9,28 @@ using Common.Interfaces;
 using CommonStandard.Interfaces;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Extensions.Internal;
+
 using NLog;
 using Remotion.Linq.Clauses;
+using ServerStandard.Repositories;
 
 namespace Server.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         internal IMyDbContext context;
+        private readonly IUnitOfWork unitOfWork;
         private DbContext myDbContext;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(IMyDbContext context)
+        public GenericRepository(IMyDbContext context, IUnitOfWork unitOfWork)
         {
+         
             this.context = context;
-            this.myDbContext = context.DbContext;
+            this.unitOfWork = unitOfWork;
+            //this.myDbContext = context.DbContext;
             this.dbSet = myDbContext.Set<TEntity>();
+            
         }
 
         public virtual Task<List<TEntity>> Get(
