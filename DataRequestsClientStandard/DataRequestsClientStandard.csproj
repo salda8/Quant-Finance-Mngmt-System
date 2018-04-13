@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="lz4net" Version="1.0.15.93" />
-    <PackageReference Include="NetMQ" Version="4.0.0.1" />
-    <PackageReference Include="protobuf-net" Version="2.3.6" />
+    <PackageReference Include="NetMQ" Version="4.0.0.156-pre" />
+    <PackageReference Include="protobuf-net" Version="2.3.7" />
   </ItemGroup>
 
   <ItemGroup>

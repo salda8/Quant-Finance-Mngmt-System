@@ -5,8 +5,7 @@ namespace ServerStandard.Repositories
 {
     public interface IUnitOfWork
     {
-        void Rollback();
-
+        
         void Save();
     }
 }

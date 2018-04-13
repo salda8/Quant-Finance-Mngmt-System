@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading;
-using System.Windows.Threading;
 
 namespace Common.Collections
 {
@@ -145,8 +144,9 @@ namespace Common.Collections
         {
             foreach (var handler in handlerThreads.Keys)
             {
-                var dispatcher = Dispatcher.FromThread(handlerThreads[handler]);
-                dispatcher?.Invoke(DispatcherPriority.Send, handler, this, e);
+                //todo I guess? Do I need it?
+                //var dispatcher = Dispatcher.FromThread(handlerThreads[handler]);
+                //dispatcher?.Invoke(DispatcherPriority.Send, handler, this, e);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Common.EntityModels
         public int Id { get; set; }
 
         [MaxLength(100)]
-        [Index("IX_Country", IsUnique = true)]
+       // [Index("IX_Country", IsUnique = true)]
         public string Name { get; set; }
 
         /// <summary>

@@ -13,9 +13,9 @@ namespace ServerStandard.Repositories
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
+        /// Initializes a new instance of the <see cref="UnitOfWork" /> class.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="dbcontext">The dbcontext.</param>
         public UnitOfWork(IMyDbContext dbcontext)
         {
             this.dbContext = dbcontext;

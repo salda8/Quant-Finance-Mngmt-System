@@ -16,7 +16,7 @@ namespace Common.EntityModels
         /// ISO 4217 3-letter currency code
         /// </summary>
         [MaxLength(3)]
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
         [Required]
         public string Code { get; set; }
 
